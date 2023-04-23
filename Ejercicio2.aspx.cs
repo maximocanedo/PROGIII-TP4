@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
-using System.IO;
 
 namespace TrabajoPractico4 {
     public partial class Ejercicio2 : System.Web.UI.Page {
@@ -30,7 +23,6 @@ namespace TrabajoPractico4 {
                     return "";
             }
         }
-        private DataSet dataset;
         /// <summary>
         /// Carga los datos de la tabla de productos de la base de datos en un control GridView. 
         /// </summary>
@@ -49,8 +41,7 @@ namespace TrabajoPractico4 {
                         if (!string.IsNullOrEmpty(IDProductoT.Text)) {
                             filtros.Add(GetFilterCommand("[IdProducto]", IDProductoT.Text, int.Parse(IDProductoDDL.SelectedValue)));
                         }
-                        if (!string.IsNullOrEmpty(IDCategoriaT.Text))
-                        {
+                        if (!string.IsNullOrEmpty(IDCategoriaT.Text)) {
                             filtros.Add(GetFilterCommand("[IdCategoría]", IDCategoriaT.Text, int.Parse(IDCategoriaDDL.SelectedValue)));
                         }
                         if (filtros.Count > 0) {
@@ -58,12 +49,8 @@ namespace TrabajoPractico4 {
                         }
                     }
                     command.CommandText = consulta;
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command)) {
-                        if (dataset == null) {
-                            dataset = new DataSet();
-                        }
-                        adapter.Fill(dataset, "productos");
-                        gvProductos.DataSource = dataset.Tables[0];
+                    using (SqlDataReader reader = command.ExecuteReader()) {
+                        gvProductos.DataSource = reader;
                         gvProductos.DataBind();
                     }
                 }
