@@ -1,0 +1,83 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.IO;
+
+namespace TrabajoPractico4 {
+    public partial class Ejercicio2 : System.Web.UI.Page {
+        /// <summary>
+        /// Crea un comando de filtro SQL para comparar el valor de un campo con un valor especificado.
+        /// </summary>
+        /// <param name="field">El nombre del campo en la tabla de la base de datos.</param>
+        /// <param name="value">El valor con el que se comparará el campo.</param>
+        /// <param name="filterType">El tipo de comparación a realizar (1 = igual a, 2 = mayor que, 3 = menor que).</param>
+        /// <returns>Un comando SQL que se puede utilizar para filtrar los resultados de una consulta.</returns>
+        protected string GetFilterCommand(string field, string value, int filterType) {
+            switch (filterType) {
+                case 1: // Igual a
+                    return $"{field} = {value}";
+                case 2: // Mayor a
+                    return $"{field} > {value}";
+                case 3: // Menor a
+                    return $"{field} < {value}";
+                default:
+                    return "";
+            }
+        }
+        private DataSet dataset;
+        /// <summary>
+        /// Carga los datos de la tabla de productos de la base de datos en un control GridView. 
+        /// </summary>
+        /// <param name="filtrar">Indica si se deben aplicar filtros a la consulta SQL.</param>
+        /// <remarks>
+        /// Si el parámetro "filtrar" se establece en verdadero, se aplicarán filtros a la consulta SQL antes de cargar los datos en el control GridView. 
+        /// Los filtros se aplicarán si los campos "IDProductoT" o "IDCategoriaT" no están vacíos. 
+        /// </remarks>
+        protected void cargarDatos(bool filtrar = false) {
+            using (SqlConnection connection = new SqlConnection(Data.NEPTUNO)) {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand()) {
+                    string consulta = "SELECT [IdProducto], [NombreProducto], [IdCategoría], [CantidadPorUnidad], [PrecioUnidad] FROM [Productos] ";
+                    List<string> filtros = new List<string>();
+                    if (filtrar) {
+                        if (!string.IsNullOrEmpty(IDProductoT.Text)) {
+                            filtros.Add(GetFilterCommand("[IdProducto]", IDProductoT.Text, int.Parse(IDProductoDDL.SelectedValue)));
+                        }
+                        /* 
+                         * Acá agregar el tema de Categorías ***
+                         */
+                        if (filtros.Count > 0) {
+                            consulta += " WHERE " + string.Join(" AND ", filtros);
+                        }
+                    }
+                    command.CommandText = consulta;
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command)) {
+                        if (dataset == null) {
+                            dataset = new DataSet();
+                        }
+                        adapter.Fill(dataset, "productos");
+                        gvProductos.DataSource = dataset.Tables[0];
+                        gvProductos.DataBind();
+                    }
+                }
+            }
+        }
+        protected void Page_Load(object sender, EventArgs e) {
+            if (!IsPostBack) {
+                cargarDatos();
+            }
+        }
+        protected void BtnQuitarFiltros_Click(object sender, EventArgs e) {
+            cargarDatos();
+        }
+        protected void BtnFiltrar_Click(object sender, EventArgs e) {
+            cargarDatos(true);
+        }
+    }
+}
