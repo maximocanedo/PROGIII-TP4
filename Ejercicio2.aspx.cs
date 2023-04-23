@@ -9,7 +9,7 @@ using System.Data;
 
 namespace TrabajoPractico4 {
     public partial class Ejercicio2 : System.Web.UI.Page {
-        private const string STRING_CONNECTION = @"Data Source=DESKTOP-G2NKNCB\SQLEXPRESS;Initial Catalog=Neptuno;Integrated Security=True";
+        private const string STRING_CONNECTION = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=Neptuno;Integrated Security=True";
         protected string GetFilterCommand(string field, string value, int filterType) {
             switch (filterType) {
                 case 1: // Igual a
@@ -22,7 +22,6 @@ namespace TrabajoPractico4 {
                     return "";
             }
         }
-        private DataSet dataset;
         protected void cargarDatos(bool filtrar = false) {
             using (SqlConnection connection = new SqlConnection(STRING_CONNECTION)) {
                 connection.Open();
@@ -41,13 +40,8 @@ namespace TrabajoPractico4 {
                         }
                     }
                     command.CommandText = consulta;
-                    Label1.Text = consulta;
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command)) {
-                        if (dataset == null) {
-                            dataset = new DataSet();
-                        }
-                        adapter.Fill(dataset, "productos");
-                        gvProductos.DataSource = dataset.Tables[0];
+                    using (SqlDataReader reader = command.ExecuteReader()) {
+                        gvProductos.DataSource = reader;
                         gvProductos.DataBind();
                     }
                 }
