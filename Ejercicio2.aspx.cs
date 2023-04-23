@@ -49,9 +49,10 @@ namespace TrabajoPractico4 {
                         if (!string.IsNullOrEmpty(IDProductoT.Text)) {
                             filtros.Add(GetFilterCommand("[IdProducto]", IDProductoT.Text, int.Parse(IDProductoDDL.SelectedValue)));
                         }
-                        /* 
-                         * Acá agregar el tema de Categorías ***
-                         */
+                        if (!string.IsNullOrEmpty(IDCategoriaT.Text))
+                        {
+                            filtros.Add(GetFilterCommand("[IdCategoría]", IDCategoriaT.Text, int.Parse(IDCategoriaDDL.SelectedValue)));
+                        }
                         if (filtros.Count > 0) {
                             consulta += " WHERE " + string.Join(" AND ", filtros);
                         }
@@ -75,6 +76,8 @@ namespace TrabajoPractico4 {
         }
         protected void BtnQuitarFiltros_Click(object sender, EventArgs e) {
             cargarDatos();
+            IDProductoT.Text = "";
+            IDCategoriaT.Text = "";
         }
         protected void BtnFiltrar_Click(object sender, EventArgs e) {
             cargarDatos(true);
