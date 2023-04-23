@@ -29,6 +29,7 @@
         <div>
             <asp:Button ID="BtnFiltrar" runat="server" Text="Filtrar" OnClick="BtnFiltrar_Click" />
             <asp:Button ID="BtnQuitarFiltros" runat="server" Text="Quitar filtros" OnClick="BtnQuitarFiltros_Click" />
+            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         </div>
         <div>
             <asp:GridView ID="gvProductos" runat="server"></asp:GridView>

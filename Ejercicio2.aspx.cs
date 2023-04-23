@@ -10,55 +10,51 @@ using System.Data;
 namespace TrabajoPractico4 {
     public partial class Ejercicio2 : System.Web.UI.Page {
         private const string STRING_CONNECTION = @"Data Source=DESKTOP-G2NKNCB\SQLEXPRESS;Initial Catalog=Neptuno;Integrated Security=True";
-        protected string getProductFilterCommand() {
-            string val = IDProductoT.Text;
-            int filtro = int.Parse(IDProductoDDL.SelectedValue);
-            switch(filtro) {
+        protected string GetFilterCommand(string field, string value, int filterType) {
+            switch (filterType) {
                 case 1: // Igual a
-                    return "= " + val;
+                    return $"{field} = {value}";
                 case 2: // Mayor a
-                    return "> " + val;
+                    return $"{field} > {value}";
                 case 3: // Menor a
-                    return "< " + val;
+                    return $"{field} < {value}";
+                default:
+                    return "";
             }
-            return "";
         }
-        protected string getCategoryFilterCommand() {
-            string val = IDCategoriaT.Text;
-            int filtro = int.Parse(IDCategoriaDDL.SelectedValue);
-            switch (filtro) {
-                case 1: // Igual a
-                    return "= " + val;
-                case 2: // Mayor a
-                    return "> " + val;
-                case 3: // Menor a
-                    return "< " + val;
-            }
-            return "";
-        }
+        private DataSet dataset;
         protected void cargarDatos(bool filtrar = false) {
-            SqlConnection connection = new SqlConnection(STRING_CONNECTION);
-            connection.Open();
-            string consulta = "SELECT [IdProducto], [NombreProducto], [IdCategoría], [CantidadPorUnidad], [PrecioUnidad] FROM [Productos] ";
-            bool seFiltraProducto = IDProductoT.Text != "";
-            bool seFiltraCategoria = IDCategoriaT.Text != "";
-            bool flt = filtrar && (seFiltraProducto || seFiltraCategoria);
-            if (filtrar) {
-                if (seFiltraProducto) {
-                    consulta += " WHERE [IdProducto] " + getProductFilterCommand();
-                }
-                if(seFiltraCategoria) {                    
-                    consulta += (seFiltraProducto? " AND " : " WHERE ") 
-                        + "[IdCategoría] " + getCategoryFilterCommand();
+            using (SqlConnection connection = new SqlConnection(STRING_CONNECTION)) {
+                connection.Open();
+                using (SqlCommand command = connection.CreateCommand()) {
+                    string consulta = "SELECT [IdProducto], [NombreProducto], [IdCategoría], [CantidadPorUnidad], [PrecioUnidad] FROM [Productos] ";
+                    List<string> filtros = new List<string>();
+                    if (filtrar) {
+                        if (!string.IsNullOrEmpty(IDProductoT.Text)) {
+                            filtros.Add(GetFilterCommand("[IdProducto]", IDProductoT.Text, int.Parse(IDProductoDDL.SelectedValue)));
+                        }
+                        if (!string.IsNullOrEmpty(IDCategoriaT.Text)) {
+                            filtros.Add(GetFilterCommand("[IdCategoría]", IDCategoriaT.Text, int.Parse(IDCategoriaDDL.SelectedValue)));
+                        }
+                        if (filtros.Count > 0) {
+                            consulta += " WHERE " + string.Join(" AND ", filtros);
+                        }
+                    }
+                    command.CommandText = consulta;
+                    Label1.Text = consulta;
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command)) {
+                        if (dataset == null) {
+                            dataset = new DataSet();
+                        }
+                        adapter.Fill(dataset, "productos");
+                        gvProductos.DataSource = dataset.Tables[0];
+                        gvProductos.DataBind();
+                    }
                 }
             }
-            SqlDataAdapter adapter = new SqlDataAdapter(consulta, connection);
-            DataSet dataset = new DataSet();
-            adapter.Fill(dataset, "Productos");
-            gvProductos.DataSource = dataset.Tables[0];
-            gvProductos.DataBind();
-            connection.Close();
         }
+
+
         protected void Page_Load(object sender, EventArgs e) {
             if(!IsPostBack) {
                 cargarDatos();
