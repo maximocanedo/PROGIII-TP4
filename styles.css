@@ -5,7 +5,7 @@
 form.agregarSucursal, main {
     padding: 15px;
     width: 100%;
-    margin-top: 36px;
+    margin-top: 48px;
     height: auto;
     display: flex;
     justify-content: center;
@@ -109,6 +109,7 @@ header {
     font-family: Arial, Verdana, Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
     display: flex;
+    z-index: 40;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
