@@ -1,9 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace TrabajoPractico4 {
     public partial class Ejercicio2 : System.Web.UI.Page {
+        public void MostrarMensaje(string mensaje) {
+            string script = "MostrarMensaje('" + mensaje + "');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "MostrarMensaje", script, true);
+        }
         /// <summary>
         /// Crea un comando de filtro SQL para comparar el valor de un campo con un valor especificado.
         /// </summary>
@@ -56,6 +65,7 @@ namespace TrabajoPractico4 {
                 }
             }
         }
+
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {
                 cargarDatos();
@@ -65,6 +75,9 @@ namespace TrabajoPractico4 {
             cargarDatos();
             IDProductoT.Text = "";
             IDCategoriaT.Text = "";
+            IDProductoDDL.SelectedIndex = 0;
+            IDCategoriaDDL.SelectedIndex = 0;
+            MostrarMensaje("Se reiniciaron los filtros. ");
         }
         protected void BtnFiltrar_Click(object sender, EventArgs e) {
             cargarDatos(true);
