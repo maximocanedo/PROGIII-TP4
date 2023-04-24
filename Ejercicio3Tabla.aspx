@@ -11,7 +11,7 @@
         <div>
             <asp:GridView ID="GridView1" runat="server">
             </asp:GridView>
-            <br />
+            <br/>
             <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Consultar otro tema</asp:LinkButton>
             <br />
         </div>
