@@ -21,7 +21,7 @@ namespace TrabajoPractico4
                 string cadenaConexion = Data.LIBRERIA;
                 SqlConnection conexion = new SqlConnection(cadenaConexion);
                 conexion.Open();
-                string consulta = "select * from Libros where IdTema="+valorDato;
+                string consulta = "select [IdLibro] as [ID], [IdTema] as [Tema], [Titulo] as [Título], [Precio], [Autor] from Libros where IdTema="+valorDato;
                 SqlCommand comando = new SqlCommand(consulta, conexion);
                 SqlDataAdapter adaptador = new SqlDataAdapter(comando);
 

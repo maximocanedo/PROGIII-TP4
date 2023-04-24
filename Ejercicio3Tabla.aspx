@@ -20,7 +20,9 @@
         <br />
         <br />
         <div>
-            <asp:GridView ID="GridView1" CssClass="mdc-typography--body2" runat="server"></asp:GridView>
+            <div class="table-container">
+                <asp:GridView ID="GridView1" CssClass="mdc-typography--body2" runat="server"></asp:GridView>
+            </div>
             <br />
             <asp:LinkButton ID="LinkButton1" CssClass="mdc-button mdc-button--raised" runat="server" OnClick="LinkButton1_Click">Consultar otro tema</asp:LinkButton>
             <br />

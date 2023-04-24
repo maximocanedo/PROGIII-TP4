@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-form.agregarSucursal {
+form.agregarSucursal, main {
     padding: 15px;
     width: 100%;
     height: auto;
@@ -12,6 +12,11 @@ form.agregarSucursal {
     flex-direction: column;
     box-sizing: border-box;
 }
+.mdc-drawer {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
 
 .links-container {
     display: flex;
@@ -20,19 +25,24 @@ form.agregarSucursal {
     justify-content: space-around;
     align-items: center;
 }
-
+.table-container {
+    border: 1px solid rgb(0 0 0 / 0.12);
+    border-radius: 4px;
+}
 table {
     width: auto;
     overflow: hidden;
-    border: 1px solid rgb(0 0 0 / 0.12);
+    border: 0px; 
     border-spacing: 0;
     table-layout: fixed;
     box-sizing: border-box;
 }
 
     table tbody tr:first-child {
-        height: 56px;
-        border-top: 1px solid rgb(0 0 0 / 0.12);
+        border-top: 0px;
+    }
+    table tbody tr:last-child {
+        border-bottom: 0px;
     }
 
 tr {

@@ -75,11 +75,11 @@
         </div>
         <br />
         <div class="flex-horizontal">
-            <asp:Button ID="BtnFiltrar" CssClass="mdc-button mdc-button--raised" runat="server" Text="Filtrar" OnClick="BtnFiltrar_Click" UseSubmitBehavior="False" />
-            <asp:Button ID="BtnQuitarFiltros" CssClass="mdc-button mdc-button--outlined" runat="server" Text="Quitar filtros" OnClick="BtnQuitarFiltros_Click" />
+            <asp:LinkButton id="BtnFiltrar" class="mdc-button mdc-button--raised" runat="server" Text="Filtrar"  OnClick="BtnFiltrar_Click" UseSubmitBehavior="False"  ></asp:LinkButton>
+            <asp:LinkButton ID="BtnQuitarFiltros" CssClass="mdc-button mdc-button--outlined" runat="server" Text="Quitar filtros" OnClick="BtnQuitarFiltros_Click" ></asp:LinkButton>
         </div>
         <br />
-        <div>
+        <div class="table-container">
             <asp:GridView ID="gvProductos" CssClass="mdc-typography--body2" runat="server"></asp:GridView>
         </div>
         <div>

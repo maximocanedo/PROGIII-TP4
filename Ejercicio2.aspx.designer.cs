@@ -64,7 +64,7 @@ namespace TrabajoPractico4 {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnFiltrar;
+        protected global::System.Web.UI.WebControls.LinkButton BtnFiltrar;
 
         /// <summary>
         /// BtnQuitarFiltros control.
@@ -73,7 +73,7 @@ namespace TrabajoPractico4 {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnQuitarFiltros;
+        protected global::System.Web.UI.WebControls.LinkButton BtnQuitarFiltros;
 
         /// <summary>
         /// gvProductos control.
