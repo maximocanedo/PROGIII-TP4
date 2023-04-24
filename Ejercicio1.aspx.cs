@@ -46,7 +46,7 @@ namespace tp4
             cn.Open();
             SqlDataAdapter adpt = new SqlDataAdapter("Select * from [Localidades] where [IdProvincia] = '" + (provicia) + "'", cn);
             adpt.Fill(ds, "localidades");
-            DDL_Inicio_Localidad.DataSource = ds.Tables["Localidades"];
+            DDL_Inicio_Localidad.DataSource = ds.Tables[0];
             DDL_Inicio_Localidad.DataTextField = "NombreLocalidad";
             DDL_Inicio_Localidad.DataValueField = "IdLocalidad";
             DDL_Inicio_Localidad.DataBind();

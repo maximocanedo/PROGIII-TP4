@@ -1,88 +1,69 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ej1.aspx.cs" Inherits="tp4.ej1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Ejercicio1.aspx.cs" Inherits="tp4.ej1" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-    <style type="text/css">
-        .auto-style1 {
-            width: 100%;
-        }
-        .auto-style2 {
-            height: 58px;
-        }
-        .auto-style3 {
-            height: 26px;
-        }
-        .auto-style4 {
-            height: 51px;
-        }
-        .auto-style5 {
-            height: 58px;
-            width: 153px;
-        }
-        .auto-style6 {
-            width: 153px;
-        }
-        .auto-style7 {
-            height: 26px;
-            width: 153px;
-        }
-        .auto-style8 {
-            height: 51px;
-            width: 153px;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 1 · T.P. N.º 4</title>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet" />
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link href="./styles.css" rel="stylesheet" />
+    <script src="./index.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <table class="auto-style1">
-        <tr>
-            <td aria-autocomplete="none" aria-orientation="horizontal" class="auto-style5">
-                <u>Destino de inicio</u></td>
-            <td aria-orientation="horizontal" class="auto-style2"></td>
-        </tr>
-        <tr>
-            <td class="auto-style7">Provincia:</td>
-            <td class="auto-style3">
-                <asp:DropDownList ID="DDL_Inicio_Provicia" runat="server" Width="205px" AutoPostBack="True" OnSelectedIndexChanged="DDL_Inicio_Provicia_SelectedIndexChanged">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr>
-            <td class="auto-style7">Localidad:</td>
-            <td class="auto-style3">
-                <asp:DropDownList ID="DDL_Inicio_Localidad" runat="server" Width="205px">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr>
-            <td class="auto-style8"><u>Destino final</u></td>
-            <td class="auto-style4">&nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style6">Provincia:</td>
-            <td>
-                <asp:DropDownList ID="DDL_Destino_Provicia" runat="server"  Width="205px" AutoPostBack="True">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr>
-            <td class="auto-style7">Localidad:</td>
-            <td class="auto-style3">
-                <asp:DropDownList ID="DDL_Destino_Localidad" runat="server" Width="205px">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr>
-            <td class="auto-style6">&nbsp;</td>
-            <td>
-                &nbsp;</td>
-        </tr>
-    </table>
-        <div>
+    <form class="agregarSucursal ejercicio1" id="form1" runat="server">
+        <div class="flex-horizontal">
+            <label class="mdc-text-field mdc-text-field--outlined">
+                <span class="mdc-notched-outline">
+                    <span class="mdc-notched-outline__leading"></span>
+                    <span class="mdc-notched-outline__notch">
+                        <span class="mdc-floating-label" id="provinciaOrigen">Provincia de origen</span>
+                    </span>
+                    <span class="mdc-notched-outline__trailing"></span>
+                </span>
+                <!-- DropDownList @DDL_Inicio_Provicia -->
+                <asp:DropDownList ID="DDL_Inicio_Provicia" AutoPostBack="True" CssClass="mdc-text-field__input" OnSelectedIndexChanged="DDL_Inicio_Provicia_SelectedIndexChanged" aria-labelledby="provinciaOrigen" runat="server"></asp:DropDownList>
+            </label>
+            <label class="mdc-text-field mdc-text-field--outlined">
+                <span class="mdc-notched-outline">
+                    <span class="mdc-notched-outline__leading"></span>
+                    <span class="mdc-notched-outline__notch">
+                        <span class="mdc-floating-label" id="localidadOrigen">Localidad de origen</span>
+                    </span>
+                    <span class="mdc-notched-outline__trailing"></span>
+                </span>
+                <!-- DropDownList @DDL_Inicio_Localidad -->
+                <asp:DropDownList ID="DDL_Inicio_Localidad" CssClass="mdc-text-field__input" aria-labelledby="localidadOrigen" runat="server"></asp:DropDownList>
+            </label>
+        </div>
+        <br />
+        <div class="flex-horizontal">
+            <label class="mdc-text-field mdc-text-field--outlined">
+                <span class="mdc-notched-outline">
+                    <span class="mdc-notched-outline__leading"></span>
+                    <span class="mdc-notched-outline__notch">
+                        <span class="mdc-floating-label" id="provinciaDestino">Provincia destino</span>
+                    </span>
+                    <span class="mdc-notched-outline__trailing"></span>
+                </span>
+                <!-- DropDownList @DDL_Destino_Provicia -->
+                <asp:DropDownList ID="DDL_Destino_Provicia" AutoPostBack="True" CssClass="mdc-text-field__input" aria-labelledby="provinciaDestino" runat="server"></asp:DropDownList>
+            </label>
+            <label class="mdc-text-field mdc-text-field--outlined">
+                <span class="mdc-notched-outline">
+                    <span class="mdc-notched-outline__leading"></span>
+                    <span class="mdc-notched-outline__notch">
+                        <span class="mdc-floating-label" id="localidadDestino">Localidad destino</span>
+                    </span>
+                    <span class="mdc-notched-outline__trailing"></span>
+                </span>
+                <!-- DropDownList @DDL_Destino_Localidad -->
+                <asp:DropDownList ID="DDL_Destino_Localidad" CssClass="mdc-text-field__input" aria-labelledby="localidadDestino" runat="server"></asp:DropDownList>
+            </label>
         </div>
     </form>
 </body>
