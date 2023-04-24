@@ -15,6 +15,15 @@
     <script src="./index.js"></script>
 </head>
 <body>
+    <header>
+        <span class="title">Trabajo Práctico N.º 4</span>
+        <a href="./Ejercicio1.aspx">Primer ejercicio</a>
+        <a href="./Ejercicio2.aspx">Segundo ejercicio</a>
+        <a href="./Ejercicio3.aspx">Tercer ejercicio</a>
+        <div class="space"></div>
+        <a href="https://github.com/maximocanedo/PROGIII-TP4">Repositorio</a>
+        <a href="https://frgp.cvg.utn.edu.ar/mod/forum/view.php?id=255204">Foro</a>
+    </header>
     <form id="form1" class="agregarSucursal" runat="server">
         <br />
         <br />
