@@ -44,7 +44,7 @@ namespace TrabajoPractico4 {
             using (SqlConnection connection = new SqlConnection(Data.NEPTUNO)) {
                 connection.Open();
                 using (SqlCommand command = connection.CreateCommand()) {
-                    string consulta = "SELECT [IdProducto] as ID, [NombreProducto] as Nombre, [IdCategoría] as [Categoría], [CantidadPorUnidad] as [Cantidad por Unidad], [PrecioUnidad] as [Precio Unitario] FROM [Productos] ";
+                    string consulta = "SELECT [IdProducto] as ID, [NombreProducto] as Nombre, [IdCategoría] as [Categoría], [CantidadPorUnidad] as [Cantidad por Unidad], FORMAT([PrecioUnidad],'C', 'en-us') AS [Precio Unitario] FROM [Productos] ";
                     List<string> filtros = new List<string>();
                     if (filtrar) {
                         if (!string.IsNullOrEmpty(IDProductoT.Text)) {
