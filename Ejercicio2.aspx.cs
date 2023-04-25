@@ -42,29 +42,46 @@ namespace TrabajoPractico4 {
         /// </remarks>
         protected void cargarDatos(bool filtrar = false) {
             using (SqlConnection connection = new SqlConnection(Data.NEPTUNO)) {
-                connection.Open();
-                using (SqlCommand command = connection.CreateCommand()) {
-                    string consulta = "SELECT [IdProducto] as ID, [NombreProducto] as Nombre, [IdCategoría] as [Categoría], [CantidadPorUnidad] as [Cantidad por Unidad], FORMAT([PrecioUnidad],'C', 'en-us') AS [Precio Unitario] FROM [Productos] ";
-                    List<string> filtros = new List<string>();
-                    if (filtrar) {
-                        if (!string.IsNullOrEmpty(IDProductoT.Text)) {
-                            filtros.Add(GetFilterCommand("[IdProducto]", IDProductoT.Text, int.Parse(IDProductoDDL.SelectedValue)));
+                try {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand()) {
+                        string consulta = "SELECT [IdProducto] as ID, [NombreProducto] as Nombre, [IdCategoría] as [Categoría], [CantidadPorUnidad] as [Cantidad por Unidad], FORMAT([PrecioUnidad],'C', 'en-us') AS [Precio Unitario] FROM [Productos] ";
+                        List<string> filtros = new List<string>();
+                        if (filtrar) {
+                            if (!string.IsNullOrEmpty(IDProductoT.Text)) {
+                                filtros.Add(GetFilterCommand("[IdProducto]", IDProductoT.Text, int.Parse(IDProductoDDL.SelectedValue)));
+                            }
+                            if (!string.IsNullOrEmpty(IDCategoriaT.Text)) {
+                                filtros.Add(GetFilterCommand("[IdCategoría]", IDCategoriaT.Text, int.Parse(IDCategoriaDDL.SelectedValue)));
+                            }
+                            if (filtros.Count > 0) {
+                                consulta += " WHERE " + string.Join(" AND ", filtros);
+                            }
                         }
-                        if (!string.IsNullOrEmpty(IDCategoriaT.Text)) {
-                            filtros.Add(GetFilterCommand("[IdCategoría]", IDCategoriaT.Text, int.Parse(IDCategoriaDDL.SelectedValue)));
-                        }
-                        if (filtros.Count > 0) {
-                            consulta += " WHERE " + string.Join(" AND ", filtros);
+                        command.CommandText = consulta;
+                        using (SqlDataReader reader = command.ExecuteReader()) {
+                            gvProductos.DataSource = reader;
+                            gvProductos.DataBind();
                         }
                     }
-                    command.CommandText = consulta;
-                    using (SqlDataReader reader = command.ExecuteReader()) {
-                        gvProductos.DataSource = reader;
-                        gvProductos.DataBind();
+                }
+                catch (SqlException ex) {
+                    // Manejar la excepción
+                    MostrarMensaje("Error de SQL: " + ex.Message);
+                }
+                catch (Exception ex) {
+                    // Manejar otras excepciones
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally {
+                    // Que la conexión se cierre siempre, incluso si hubo excepciones.
+                    if (connection.State != ConnectionState.Closed) {
+                        connection.Close();
                     }
                 }
             }
         }
+
 
         protected void Page_Load(object sender, EventArgs e) {
             if (!IsPostBack) {

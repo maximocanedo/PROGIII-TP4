@@ -58,15 +58,6 @@ namespace TrabajoPractico4 {
         protected global::System.Web.UI.WebControls.TextBox IDCategoriaT;
 
         /// <summary>
-        /// BtnFiltrar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BtnFiltrar;
-
-        /// <summary>
         /// BtnQuitarFiltros control.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,15 @@ namespace TrabajoPractico4 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton BtnQuitarFiltros;
+
+        /// <summary>
+        /// BtnFiltrar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BtnFiltrar;
 
         /// <summary>
         /// gvProductos control.

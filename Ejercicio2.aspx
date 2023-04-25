@@ -56,8 +56,8 @@
                     </span>
                     <span class="mdc-notched-outline__trailing"></span>
                 </span>
-                <!-- TextBox @tbNombreSucursal -->
-                <asp:TextBox ID="IDProductoT" CssClass="mdc-text-field__input" aria-labelledby="my-label-id1" runat="server"></asp:TextBox>
+                <!-- TextBox @IDProductoT -->
+                <asp:TextBox ID="IDProductoT" type="number" CssClass="mdc-text-field__input" aria-labelledby="my-label-id1" runat="server"></asp:TextBox>
             </label>
         </div>
         <br />
@@ -86,13 +86,13 @@
                     <span class="mdc-notched-outline__trailing"></span>
                 </span>
                 <!-- TextBox @IDCategoriaT -->
-                <asp:TextBox ID="IDCategoriaT" CssClass="mdc-text-field__input" aria-labelledby="my-label-id6" runat="server"></asp:TextBox>
+                <asp:TextBox ID="IDCategoriaT" type="number" CssClass="mdc-text-field__input" aria-labelledby="my-label-id6" runat="server"></asp:TextBox>
             </label>
         </div>
         <br />
         <div class="flex-horizontal">
-            <asp:LinkButton id="BtnFiltrar" class="mdc-button mdc-button--raised" runat="server" Text="Filtrar"  OnClick="BtnFiltrar_Click" UseSubmitBehavior="False"  ></asp:LinkButton>
             <asp:LinkButton ID="BtnQuitarFiltros" CssClass="mdc-button mdc-button--outlined" runat="server" Text="Quitar filtros" OnClick="BtnQuitarFiltros_Click" ></asp:LinkButton>
+            <asp:LinkButton id="BtnFiltrar" class="mdc-button mdc-button--raised" runat="server" Text="Filtrar"  OnClick="BtnFiltrar_Click" UseSubmitBehavior="False"  ></asp:LinkButton>
         </div>
         <br />
         <div class="table-container">

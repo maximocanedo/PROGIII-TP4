@@ -81,6 +81,11 @@
                 <asp:DropDownList ID="DDL_Destino_Localidad" CssClass="mdc-text-field__input" aria-labelledby="localidadDestino" runat="server"></asp:DropDownList>
             </label>
         </div>
+         <aside class="mdc-snackbar">
+                <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+                    <div class="mdc-snackbar__label" aria-atomic="false"></div>
+                </div>
+            </aside>
     </form>
 </body>
 </html>
