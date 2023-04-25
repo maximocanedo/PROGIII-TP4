@@ -51,7 +51,7 @@
                     <span class="mdc-notched-outline__trailing"></span>
                 </span>
                 <!-- DropDownList @DDL_Destino_Provicia -->
-                <asp:DropDownList ID="DDL_Destino_Provicia" AutoPostBack="True" CssClass="mdc-text-field__input" aria-labelledby="provinciaDestino" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="DDL_Destino_Provicia" AutoPostBack="True" CssClass="mdc-text-field__input" aria-labelledby="provinciaDestino" runat="server" OnSelectedIndexChanged="DDL_Destino_Provicia_SelectedIndexChanged"></asp:DropDownList>
             </label>
             <label class="mdc-text-field mdc-text-field--outlined">
                 <span class="mdc-notched-outline">
