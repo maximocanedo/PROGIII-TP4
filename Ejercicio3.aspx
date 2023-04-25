@@ -22,8 +22,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- Librerías utilizadas -->
-    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet" />
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link href="./mdc/material-components-web.min.css" rel="stylesheet" />
+    <script src="./mdc/material-components-web.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <!-- Archivos usados -->
     <link rel="icon" href="utn.ico" type="image/x-icon" />
